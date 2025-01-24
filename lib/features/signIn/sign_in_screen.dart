@@ -32,16 +32,20 @@ class SignInScreen extends StatelessWidget {
               prefixIcon: Icon(Icons.email),
             ),
             CustomFormField(
-              labelText: 'password',
-              prefixIcon: Icon(Icons.lock),
-              suffixIcon: Icon(Icons.visibility),
+              labelText: 'Password',
+              prefixIcon: const Icon(Icons.lock),
+              isPasswordField: true,
             ),
             Align(
                 alignment: Alignment.centerRight,
                 child: GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushNamed(context, AppRoutes.forgetPassword);
+                  },
                   child: Text('Forgot Password?',
                       style: TextStyle(
+                        decoration: TextDecoration.underline,
+                        decorationColor: AppColors.primaryColor,
                         color: AppColors.primaryColor,
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -78,6 +82,8 @@ class SignInScreen extends StatelessWidget {
                   },
                   child: Text('Create Account',
                       style: TextStyle(
+                          decoration: TextDecoration.underline,
+                          decorationColor: AppColors.primaryColor,
                           color: AppColors.primaryColor,
                           fontSize: 16,
                           fontWeight: FontWeight.bold)),

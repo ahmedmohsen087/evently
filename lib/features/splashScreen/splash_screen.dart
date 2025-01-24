@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.signIn);
+      Navigator.pushReplacementNamed(context, AppRoutes.onboardingStart);
     });
     super.initState();
   }
