@@ -1,10 +1,15 @@
+import 'dart:developer';
+
+import 'package:evently/core/services%20/snack_bar_service.dart';
 import 'package:evently/core/theme/app_colors.dart';
 import 'package:evently/core/utiles/firebase_functions.dart';
 import 'package:evently/core/widgets/custom_form_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '../../core/constants/app_assets.dart';
 import '../../core/routes/app_routes.dart';
+import '../../core/services /validations.dart';
 
 class RegisterScreen extends StatefulWidget {
   static const routeName = 'register';
@@ -60,7 +65,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   prefixIcon: const Icon(Icons.person),
                   keyboardType: TextInputType.name,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
+                    if (value == null || value.trim().isEmpty) {
                       return 'Please enter your name';
                     }
                     return null;
@@ -73,6 +78,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   prefixIcon: const Icon(Icons.email),
                   keyboardType: TextInputType.emailAddress,
                   validator: (value) {
+                    Validations.validateEmail(value);
+                    //return null;
                     if (value == null || value.isEmpty) {
                       return 'Please enter your email';
                     }
@@ -90,11 +97,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   isPasswordField: true,
                   keyboardType: TextInputType.visiblePassword,
                   validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter your password';
-                    }
-                    if (value.length < 6) {
-                      return 'Password must be at least 6 characters';
+                    if (!Validations.validatePassword(value)) {
+                      return 'Password must be at least 8 characters, contain at least one uppercase letter, one lowercase letter, one number, and one special character';
                     }
                     return null;
                   },
@@ -125,14 +129,28 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     ),
                   ),
                   onPressed: () {
-                    setState(() {
-                      if (_formKey.currentState!.validate()) {
-                        FirebaseFunctions.createAccount(
-                          emailController.text,
-                          passwordController.text,
-                        );
-                      }
-                    });
+                    if (_formKey.currentState!.validate()) {
+                      log("Create Account");
+                      FirebaseFunctions.createAccount(
+                        emailController.text,
+                        passwordController.text,
+                      ).then(
+                        (value) {
+                          EasyLoading.dismiss();
+                          if (value == true) {
+                            Navigator.pushReplacementNamed(
+                                context, AppRoutes.signIn);
+                            SnackBarService.showSuccessMessage(
+                              "Success Create Account",
+                            );
+                          } else {
+                            SnackBarService.showErrorMessage(
+                              "User Already Exists",
+                            );
+                          }
+                        },
+                      );
+                    }
                   },
                   child: const Padding(
                     padding: EdgeInsets.all(10.0),

@@ -34,6 +34,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
       keyboardType: widget.keyboardType,
       validator: widget.validator,
       maxLines: 1,
+      autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: widget.isPasswordField ? _isObscured : false,
       decoration: InputDecoration(
         labelText: widget.labelText,
@@ -70,6 +71,20 @@ class _CustomFormFieldState extends State<CustomFormField> {
           borderRadius: BorderRadius.circular(16),
           borderSide: const BorderSide(
             color: AppColors.gray,
+            width: 1.0,
+          ),
+        ),
+        errorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: Colors.red,
+            width: 1.0,
+          ),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: const BorderSide(
+            color: Colors.red,
             width: 1.0,
           ),
         ),

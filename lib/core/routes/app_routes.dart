@@ -1,3 +1,4 @@
+import 'package:evently/features/home_screen/home_screen.dart';
 import 'package:evently/features/register/register_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,7 @@ class AppRoutes {
   static const String forgetPassword = ForgetPassword.routeName;
   static const String onboardingStart = OnboardingStartScreen.routeName;
   static const String onboardingScreen = OnboardingScreen.routeName;
+  static const String homeScreen = HomeScreen.routeName;
 
   static Map<String, WidgetBuilder> getRoutes() {
     return {
@@ -23,6 +25,7 @@ class AppRoutes {
       forgetPassword: (context) => const ForgetPassword(),
       onboardingStart: (context) => const OnboardingStartScreen(),
       onboardingScreen: (context) => const OnboardingScreen(),
+      homeScreen: (context) => const HomeScreen(),
     };
   }
 }
