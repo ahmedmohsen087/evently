@@ -3,20 +3,22 @@ import 'package:flutter/material.dart';
 
 class CustomFormField extends StatefulWidget {
   final String labelText;
-  final Widget prefixIcon;
+  final Widget? prefixIcon;
   final bool isPasswordField;
   final TextEditingController? controller;
   final TextInputType keyboardType;
   final String? Function(String?)? validator;
+  final int maxLines;
 
   const CustomFormField({
     super.key,
     required this.labelText,
-    required this.prefixIcon,
+    this.prefixIcon,
     this.isPasswordField = false,
     this.controller,
     this.keyboardType = TextInputType.text,
     this.validator,
+    this.maxLines = 1,
   });
 
   @override
@@ -33,7 +35,7 @@ class _CustomFormFieldState extends State<CustomFormField> {
       controller: widget.controller,
       keyboardType: widget.keyboardType,
       validator: widget.validator,
-      maxLines: 1,
+      maxLines: widget.maxLines,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       obscureText: widget.isPasswordField ? _isObscured : false,
       decoration: InputDecoration(
