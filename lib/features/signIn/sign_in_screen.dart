@@ -22,10 +22,11 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
   final _formKey = GlobalKey<FormState>();
-  final emailController = TextEditingController();
-  final passwordController = TextEditingController();
-  final nameController = TextEditingController();
-  final rePasswordController = TextEditingController();
+  final emailController = TextEditingController(text: 'hamada0871@gmail.com');
+  final passwordController = TextEditingController(text: 'Hamada@123');
+
+  // final nameController = TextEditingController();
+  //final rePasswordController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     var mediaQuery = MediaQuery.of(context);
@@ -102,7 +103,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           EasyLoading.dismiss();
                           if (value == true) {
                             Navigator.pushReplacementNamed(
-                                context, AppRoutes.homeScreen);
+                                context, AppRoutes.homeLayout);
                             SnackBarService.showSuccessMessage(
                               "Success Login To Your Account",
                             );
@@ -189,7 +190,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           height: 25,
                           width: 25,
                         ),
-                        Text('Login With Facebook',
+                        Text('Login With Google',
                             style: TextStyle(
                               color: AppColors.primaryColor,
                               fontSize: 20,

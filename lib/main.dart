@@ -3,6 +3,7 @@ import 'package:evently/core/routes/app_routes.dart';
 import 'package:evently/core/theme/app_theme_manger.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'core/services /loading_service.dart';
 import 'firebase_options.dart';
@@ -26,10 +27,9 @@ class MyApp extends StatelessWidget {
       initialRoute: AppRoutes.splash,
       routes: AppRoutes.getRoutes(),
       theme: AppThemeManger.lightTheme,
-      builder: BotToastInit(),
-      // builder: EasyLoading.init(
-      //   builder: BotToastInit(),
-      // ),
+      builder: EasyLoading.init(
+        builder: BotToastInit(),
+      ),
     );
   }
 }
